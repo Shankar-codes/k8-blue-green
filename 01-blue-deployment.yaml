@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-blue
+  # replicaset labels
+  labels:
+    purpose: blue-green
+    project: ellamma-ecommerce
+    color: blue
+spec:
+  replicas: 4 #create 3 pods of replica
+  selector:
+    # these labels are used to select the pods
+    matchLabels:
+      purpose: blue-green
+      project: ellamma-ecommerce
+      color: blue
+# pod definition      
+  template:
+    metadata:
+      labels:
+        purpose: blue-green
+        project: ellamma-ecommerce
+        color: blue
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:trixie-perl
